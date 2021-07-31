@@ -1,40 +1,53 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from sqlalchemy.ext.automap import automap_base
+# import config
 
+# db = SQLAlchemy()
+
+
+app = Flask(__name__)
+db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:xorb1029@localhost:5432/postgres'
+
+# with app.app_context():
+db.init_app(app)
+# db.Model.metadata.reflect(db.engine)
+
+Base = automap_base()
+Base.prepare(db.engine, reflect=True)
+
+
+
+from my_app.routes import (main_route,user_routes,test)
+app.register_blueprint(main_route.bp)
+app.register_blueprint(user_routes.bp)
+app.register_blueprint(test.bp)
+
+
+
+'''
 def create_app():
     app = Flask(__name__)
 
-    from my_app.routes import user_routes    
-    app.register_blueprint(user_routes.bp)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:xorb1029@localhost:5432/postgres'
 
-    @app.route('/')
-    def index():
-        return render_template('index.html')
+    with app.app_context():
+        db.init_app(app)
+        db.Model.metadata.reflect(db.engine)
+
+
+    from my_app.routes import (main_route,user_routes,test)
+    app.register_blueprint(main_route.bp)
+    app.register_blueprint(user_routes.bp)
+    app.register_blueprint(test.bp)
+
     
     return app
+'''
 
-
-#######################
-
-# from my_app.routes import user_routes
-
-# app = Flask(__name__)
-# app.register_blueprint(user_routes.bp)
-
-# @app.route('/')
-# def index():
-#     return 'Hello World!'
-
-########################
-
-# @app.route('/user/<user_id>')
-# def user_page(user_id):
-#     return f'Welcome {user_id}!'
-
-# @app.route('/index/', defaults={ 'num' : 0 })
-# @app.route('/index/<int:num>')
-# def index_number(num):
-#     return 'Welcome to Index %i' % int(num)
 
 if __name__ == '__main__':
-    app = create_app()
+    # app = create_app()
     app.run(debug=True)
