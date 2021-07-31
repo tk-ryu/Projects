@@ -9,21 +9,22 @@ from sqlalchemy.ext.automap import automap_base
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:xorb1029@localhost:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/postgres'
 
 # with app.app_context():
 db.init_app(app)
-# db.Model.metadata.reflect(db.engine)
+db.Model.metadata.reflect(db.engine)
 
-Base = automap_base()
-Base.prepare(db.engine, reflect=True)
+# Base = automap_base()
+# Base.prepare(db.engine, reflect=True)
 
 
 
-from my_app.routes import (main_route,user_routes,test)
+from my_app.routes import (main_route,user_routes)
+from my_app.models import model
 app.register_blueprint(main_route.bp)
 app.register_blueprint(user_routes.bp)
-app.register_blueprint(test.bp)
+app.register_blueprint(model.bp)
 
 
 
@@ -31,7 +32,7 @@ app.register_blueprint(test.bp)
 def create_app():
     app = Flask(__name__)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:xorb1029@localhost:5432/postgres'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/postgres'
 
     with app.app_context():
         db.init_app(app)
