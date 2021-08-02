@@ -73,6 +73,56 @@
         <table class="table table-striped table-bordered" style='color:white;'>
           <thead>
             <tr>
+              {% for recipe in recipes %}
+              <th colspan=4>{{recipe}}</th>
+              <!-- <th>TEST2</th>
+              <th>TEST3</th> -->
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <tr align='center'>
+
+              <td colspan=4><img src="../static/images/wonderful_salsa.jpg" width=80%> </td>
+              <td colspan=4><img src="../static/images/oven_bbq_ribs.jpg" width=80%> </td>
+              <td colspan=4><img src="../static/images/chocolate_chip_cookies.jpg" width=80%> </td>
+            </tr>
+            <tr align='center' style='font-size:20'>
+              <td></td>
+              <td>Rating : </td>
+              <td> 5 </td>
+              <td></td>
+              <td></td>
+              <td>Rating : </td>
+              <td> 5 </td>
+              <td></td><td></td>
+              <td>Rating : </td>
+              <td> 5 </td>
+              <td></td>
+            </tr>
+            <tr align='center' style='font-size:20'>
+              <td> </td>
+              <td >Reviews : </td>
+              <td> 5 </td>
+              <td> </td>
+              <td> </td>
+              <td >Reviews : </td>
+              <td> 5 </td>
+              <td> </td>
+              <td> </td>
+              <td >Reviews : </td>
+              <td> 5 </td>
+              <td> </td>
+            </tr>
+          </tbody>
+          
+        </table>
+
+
+        
+        <table class="table table-striped table-bordered" style='color:white;'>
+          <thead>
+            <tr>
               {% for result in results %}
               <th colspan=4>
                 <a href="{{ url_for('main.recipe', rp_id=result.recipe_id) }}">{{result.name}}</a>
@@ -85,7 +135,7 @@
 
               <td colspan=4><img src="../static/images/wonderful_salsa.jpg" width=80%> </td>
               <td colspan=4><img src="../static/images/oven_bbq_ribs.jpg" width=80%> </td>
-              <td colspan=4><img src="../static/images/crock pot chops.jpg" width=80%> </td>
+              <td colspan=4><img src="../static/images/chocolate_chip_cookies.jpg" width=80%> </td>
             </tr>
             <tr align='center' style='font-size:20'>
               {% for result in results %}

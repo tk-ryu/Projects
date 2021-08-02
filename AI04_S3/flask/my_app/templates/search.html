@@ -1,0 +1,73 @@
+<html>
+  <head>
+    <title>
+      Index Page
+    </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_bootstrap.css') }}">
+
+  </head>
+  <body>
+   
+    <div class="container">
+      <div class="jumbotron">
+        <h1 style='color:rgb(255, 102, 0)'> Search results for "{{keyword}}"</h1>
+        <br>
+        <br>
+        {% for result in results %}
+          {% set id = result.recipe_id %}
+          {% set count = result[1] %}
+          {% set rating = result[2] %}
+          {% set name = result.name %}
+          {% set time = result.minutes %}
+          {% set ingredients = result.ingredients %}
+          {% set tags = result.tags %}
+
+          <div class="results"> 
+            <div classs="name">
+              <h1>
+                <a href="{{ url_for('main.recipe', rp_id=id) }}">{{name}}</a>
+              </h1>
+              <a ><b>Time</b> : {{time}}min</a>
+              <br>
+              <a><b>Ingredients</b> : {{ingredients}}</a>
+              <br>
+              <a><b>Tags</b> : {{tags}}</a>
+              <br>
+            </div>
+            <div class="reviews">
+              <a><b>Rating</b> : {{'%0.2f' %rating|float}}</a>
+              <br>
+              <a><b>Reviews</b> : {{count}}</a>
+              <br>
+              <br>
+            </div>
+          </div>
+        {% endfor %}
+        
+
+
+
+        <!-- {% for id in ids %}
+            {% set item_1 = ids[loop.index-1] %}
+            {% set item_2 = counts[loop.index-1] %}
+            {% set item_3 = results[loop.index-1][2] %}
+            <h1> {{item_1}}, {{item_2}}, {{item_3}}</h1>
+
+        {% endfor %} -->
+        
+
+<!-- 
+
+      {% for id in ids %}
+        {% for count in counts %}
+        {{id, count}} <br>
+        {% endfor %}
+      {% endfor %} -->
+
+
+      </div>
+
+    </div>
+  </body>
+</html>
