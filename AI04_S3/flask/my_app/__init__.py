@@ -9,7 +9,9 @@ from sqlalchemy.ext.automap import automap_base
 
 app = Flask(__name__)
 db = SQLAlchemy(app)
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1234@localhost:5432/postgres'
+app.config['SECRET_KEY'] = "key"
 
 # with app.app_context():
 db.init_app(app)

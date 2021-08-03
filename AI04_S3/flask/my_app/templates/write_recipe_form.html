@@ -1,0 +1,90 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div class="container">
+            <h5 class="my-3 border-bottom pb-2">요청등록</h5>
+            <form method="post" class="post-form my-3">
+                {{ form.csrf_token }}
+                {% for field, errors in form.errors.items() %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ form[field].label }}</strong>: {{ ', '.join(errors) }}
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="subject">제목</label>
+                    <input type="text" class="form-control" name="subject" id="subject"
+                        value="{{ form.subject.data or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" name="content"
+                        id="content" rows="10">{{ form.content.data or '' }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">저장하기</button>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="container">
+            <h5 class="my-3 border-bottom pb-2">Write your own recipe</h5>
+            <form method="post" class="post-form my-3">
+                {{ form.csrf_token }}
+                {% for field, errors in form.errors.items() %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{ form[field].label }}</strong>: {{ ', '.join(errors) }}
+                </div>
+                {% endfor %}
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" class="form-control" name="subject" id="subject"
+                        value="{{ form.subject.data or '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="time">Time</label>
+                    <textarea class="form-control" name="time"
+                        id="time" rows="1">{{ form.time.data or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients1">Ingredient 1</label>
+                    <textarea class="form-control" name="ingredients1"
+                        id="ingredients1" rows="1">{{ form.ingredients1.data or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients2">Ingredient 2</label>
+                    <textarea class="form-control" name="ingredients2"
+                        id="ingredients2" rows="1">{{ form.ingredients2.data or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients3">Ingredient 3</label>
+                    <textarea class="form-control" name="ingredients3"
+                        id="ingredients3" rows="1">{{ form.ingredients3.data or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients4">Ingredient 4</label>
+                    <textarea class="form-control" name="ingredients4"
+                        id="ingredients4" rows="1">{{ form.ingredients4.data or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients5">Ingredient 5</label>
+                    <textarea class="form-control" name="ingredients5"
+                        id="ingredients5" rows="1">{{ form.ingredients5.data or '' }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tags">Tags</label>
+                    <textarea class="form-control" name="tags"
+                        id="tags" rows="1">{{ form.content.data or '' }}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div> -->
+    </body>

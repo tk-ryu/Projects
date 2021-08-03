@@ -8,29 +8,24 @@
 
   </head>
   <body>
-    {% include "navbar.html" %}
-     
-    <div class='title'>
-      <h1 style="font-size:100px; text-align:center; margin-top:50px; color:white;">What's in my fridge?</h1>
-    </div>
 
     <form method="get" action="{{ url_for('main.search', name='kw') }}">
-      <div class="input-group" style='font-size: 50px;'>
+      <div class="input-group" style='font-size: 20px;'>
         <input type="text" class="form-control kw" name="kw" id="kw" value="{{kw or '' }}" placeholder="Enter search value">
-        <input type="submit" class="btn btn-primary" style="width:120px;background-color: maroon; border:none; cursor:pointer;" value="Search">
+        <input type="submit" class="btn btn-primary" style="width:120px;background-color: maroon; border:none;" value="Search">
       </div>  
     </form>
 
       <div class="jumbotron">
-        <h1 style="font-size:50px; text-align:center; margin-top:0;">Most Popular Recipes</h1>
+        <h1 style="font-size:50px; text-align:center; margin-top:0;">Most Popular recipes</h1>
         <br>
         <br>
-        <table class="table" style='color:white;'>
+        <table class="table table-striped table-bordered" style='color:white;'>
           <thead>
             <tr>
               {% for result in results %}
               <th colspan=4>
-                <a href="{{ url_for('main.recipe', rp_id=result.recipe_id) }}" style='color:white'>{{result.name}}</a>
+                <a href="{{ url_for('main.recipe', rp_id=result.recipe_id) }}">{{result.name}}</a>
               </th>
               {% endfor %}
             </tr>

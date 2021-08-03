@@ -8,6 +8,8 @@
   </head>
 
   <body>
+    {% include "navbar.html" %}
+
     <div class="container">
       <div class="jumbotron">
         <h1 style="font-size:50px; text-align:center; margin-top:0;">{{recipe.name}}</h1>
@@ -68,8 +70,34 @@
                 </tr>
                 
                 {% endfor %}
+
+
             </thead>
         </table>
+
+
+        <div class="container">
+          <h5 class="my-3 border-bottom pb-2">Write Reviews</h5>
+          <form method="post" class="post-form my-3">
+              {{ form.csrf_token }}
+              {% for field, errors in form.errors.items() %}
+              <div class="alert alert-danger" role="alert">
+                  <strong>{{ form[field].label }}</strong>: {{ ', '.join(errors) }}
+              </div>
+              {% endfor %}
+              <div class="form-group">
+                  <label for="subject">Rating</label>
+                  <input type="text" class="form-control" name="subject" id="subject"
+                      value="{{ form.subject.data or '' }}">
+              </div>
+              <div class="form-group">
+                  <label for="content">Review</label>
+                  <textarea class="form-control" name="content"
+                      id="content" rows="10">{{ form.content.data or '' }}</textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Save</button>
+          </form>
+        </div>
       </div>
     </div>
   </body>

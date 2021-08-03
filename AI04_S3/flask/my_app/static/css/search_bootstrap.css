@@ -22,3 +22,20 @@
     width: 100%;
     font-size : 25px
   }
+
+  ul {
+    display : inline;
+  }
+  
+  li {
+    display : inline;
+  }
+  
+  li a{
+    display: inline;
+    color : white;
+    text-align: center;
+    padding : 15px 20px;
+    text-decoration:none
+  
+  }
