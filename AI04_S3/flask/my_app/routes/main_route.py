@@ -12,6 +12,7 @@ bp = Blueprint('main', __name__)
 
 @bp.route('/')
 
+
 def main():
     user_name = session.get('user_name')
     top_reviews = db.session.query(Review.recipe_id, db.func.sum(Review.rating)).group_by(Review.recipe_id).order_by(db.func.sum(Review.rating).desc()).limit(3).all()
@@ -22,9 +23,11 @@ def main():
 
     results = db.session.query(Review.recipe_id, db.func.count(Review.rating), db.func.avg(Review.rating), Raw_rp.name, Raw_rp.minutes, Raw_rp.ingredients, Raw_rp.tags).filter(In_rp.ingr_id==Ingr.id).filter(In_rp.rp_id==Review.recipe_id).filter(Raw_rp.id==In_rp.rp_id).group_by(Review.recipe_id, Raw_rp.name, Raw_rp.minutes, Raw_rp.ingredients, Raw_rp.tags).order_by(db.func.count(Review.rating).desc()).limit(3).all()
 
+    results2 = db.session.query(Review.recipe_id, db.func.count(Review.rating), db.func.avg(Review.rating), Raw_rp.name, Raw_rp.minutes, Raw_rp.ingredients, Raw_rp.tags).filter(Raw_rp.id==Review.recipe_id).group_by(Review.recipe_id, Raw_rp.name, Raw_rp.minutes, Raw_rp.ingredients, Raw_rp.tags).order_by(db.func.count(Review.rating).desc()).limit(3).all()
+
     # breakpoint()
 
-    return render_template('index.html', ratings=top_ratings, recipes=recipe_list, results=results, user_name = user_name)
+    return render_template('index.html', results=results2, user_name = user_name)
 
 
 @bp.route('/search')
@@ -41,6 +44,9 @@ def search():
         
         results = db.session.query(Review.recipe_id, db.func.count(Review.rating), db.func.avg(Review.rating), Raw_rp.name, Raw_rp.minutes, Raw_rp.ingredients, Raw_rp.tags).filter(In_rp.ingr_id==Ingr.id).filter(In_rp.rp_id==Review.recipe_id).filter(Raw_rp.id==In_rp.rp_id).filter(Ingr.replaced.ilike(ingr)).group_by(Review.recipe_id, Raw_rp.name, Raw_rp.minutes, Raw_rp.ingredients, Raw_rp.tags).order_by(db.func.count(Review.rating).desc()).limit(5).all()
         
+        # breakpoint()
+
+
         recipe_ids = [i[0] for i in results]
         review_counts = [i[1] for i in results]
 
@@ -81,7 +87,7 @@ def recipe(rp_id):
 
 @bp.route('/write_recipe', methods=('GET', 'POST'))
 def write():
-    form = RecipeForm
+    form = RecipeForm()
     if request.method =='POST' and form.validate_on_submit():
         raw_recipe = Raw_rp(name = form.subject.data, 
                             minutes = form.time.data,

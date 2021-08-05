@@ -81,6 +81,18 @@ def login_required(view):
 @bp.route('/my_page', methods=('GET', 'POST'))
 def mypage():
     form = ChangePassword()
+
+    if request.method == 'POST' and form.validate_on_submit():
+        user = Users.query.filter_by(u = g.user.u).first()
+        if g.user != user:
+            flash('no authority')
+            return redirect(url_for('user.mypage'))
+    
+        else:
+            user.password = generate_password_hash(form.password.data)
+            db.session.commit()
+            render_template('my_page.html', form=form)
+
     return render_template('my_page.html', form=form)
 
 
@@ -96,7 +108,7 @@ def modify(user_id):
         return redirect(url_for('user.mypage'))
     
     else:
-        user.password = generate_password_hash(form.password1.data)
+        user.password = generate_password_hash(form.password.data)
         db.session.commit()
         render_template('my_page.html', form=form)
 

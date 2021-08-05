@@ -13,12 +13,12 @@ class ReviewForm(FlaskForm):
 class RecipeForm(FlaskForm):
     subject = TextAreaField('Subject', validators=[DataRequired('Enter subject')])
     time = TextAreaField('Time', validators=[DataRequired('Cooking time in minutes')])
-    ingredients1 = TextAreaField('Ingredients', validators=[DataRequired('Ingredients')])
-    ingredients2 = TextAreaField('Ingredients', validators=[DataRequired('Ingredients')])
-    ingredients3 = TextAreaField('Ingredients', validators=[DataRequired('Ingredients')])
-    ingredients4 = TextAreaField('Ingredients', validators=[DataRequired('Ingredients')])
-    ingredients5 = TextAreaField('Ingredients', validators=[DataRequired('Ingredients')])
-    tags = TextAreaField('Tags', validators=[DataRequired('Ingredients')])
+    ingredients1 = TextAreaField('Ingredients1', validators=[DataRequired('Ingredients1')])
+    ingredients2 = TextAreaField('Ingredients2', validators=[DataRequired('Ingredients2')])
+    ingredients3 = TextAreaField('Ingredients3', validators=[DataRequired('Ingredients3')])
+    ingredients4 = TextAreaField('Ingredients4', validators=[DataRequired('Ingredients4')])
+    ingredients5 = TextAreaField('Ingredients5', validators=[DataRequired('Ingredients5')])
+    tags = TextAreaField('Tags', validators=[DataRequired('Tags')])
 
 
 class UserCreateForm(FlaskForm):
@@ -36,5 +36,5 @@ class OrderForm(FlaskForm):
 
 
 class ChangePassword(FlaskForm):
-    password1 = PasswordField('Password', validators=[DataRequired("New Password")])
+    password = PasswordField('Password', validators=[DataRequired("New Password")])
     
